@@ -1,0 +1,3 @@
+=== C PROGRAM OUTPUT REPORT ===
+Status: Execution Successful
+Calculation Result (12 * 8): 96
