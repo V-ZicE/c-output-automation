@@ -1,0 +1,31 @@
+name: Compile and Run C Program
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: # Allows manual trigger button in GitHub UI
+
+permissions:
+  contents: write # Grants permission to commit files back to repository
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Compile C Program
+      run: gcc main.c -o my_program
+
+    - name: Execute C Program
+      run: ./my_program
+
+    - name: Commit and Push Output
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add output.txt
+        git commit -m "Auto-update C program output [skip ci]" || exit 0
+        git push
